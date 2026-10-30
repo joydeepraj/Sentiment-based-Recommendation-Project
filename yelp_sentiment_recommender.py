@@ -24,24 +24,6 @@ Implemented:
   6. MAE, RMSE, Precision@5, Recall@5 and F1@5
   7. A dependency-based aspect extraction baseline and AFINN sentiment scores
 
-Important reproducibility notes:
-  * The paper uses SentiWordNet for emotional offsets and AFINN for aspect
-    sentiment. This script uses AFINN scores for both by default so that it
-    can run with a single lexicon. Set --emotion-lexicon sentiwordnet to use
-    NLTK's SentiWordNet corpus for the emotional-offset stage.
-  * The paper's exact phrase-dependency rules and its full multi-criteria
-    aggregation implementation are not fully specified in the article.
-    The aspect module below is therefore an executable approximation:
-    spaCy noun chunks are aspect candidates; AFINN scores the containing
-    sentence; WordNet Wu-Palmer similarity optionally groups non-top aspects.
-  * The paper reports five-fold cross-validation but does not specify the
-    exact fold assignment. This implementation uses shuffled interaction-level
-    folds. For very large city subsets, use --max-reviews-per-city to control
-    runtime and memory.
-  * The Yelp dataset is not downloaded automatically. Download and extract
-    it from Yelp, then pass the directory containing business.json and
-    review.json (or the academic-dataset filenames) with --data-dir.
-
 Example:
     pip install -r requirements.txt
     python yelp_sentiment_recommender.py --data-dir ./yelp_dataset
